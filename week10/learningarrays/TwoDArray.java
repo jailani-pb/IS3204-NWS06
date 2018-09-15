@@ -32,6 +32,7 @@ public class TwoDArray {
 				System.out.println("    ===============");
 			}
 			
+			System.out.println("Player " + playerSymbol + " turn.");
 			System.out.println("Please input xy coordinate:");
 			input = userInput.nextLine();
 			
@@ -47,12 +48,52 @@ public class TwoDArray {
 						
 						ticTacToe[x][y] = playerSymbol;
 						
-						if(player1Turn == true) {
-							player1Turn = false;
-							playerSymbol = 'X';
+						// Check if player
+						// Check for all rows
+						for(int rows = 0; rows < 3; rows++) {
+							if(ticTacToe[rows][0] == playerSymbol &&
+									ticTacToe[rows][1] == playerSymbol &&
+									ticTacToe[rows][2] == playerSymbol) {
+								playerWins = true;
+								break;
+							}
+						}
+						// Check for all columns
+						if(playerWins == false) {
+							for(int columns = 0; columns < 3; columns++) {
+								if(ticTacToe[0][columns] == playerSymbol &&
+										ticTacToe[1][columns] == playerSymbol &&
+										ticTacToe[2][columns] == playerSymbol) {
+									playerWins = true;
+									break;
+								}
+							}
+						}
+						// Check for diagonals
+						if(playerWins == false) {
+							if(ticTacToe[0][0] == playerSymbol &&
+									ticTacToe[1][1] == playerSymbol &&
+									ticTacToe[2][2] == playerSymbol) {
+								playerWins = true;
+							} else {
+								if(ticTacToe[0][2] == playerSymbol &&
+										ticTacToe[1][1] == playerSymbol &&
+										ticTacToe[2][0] == playerSymbol) {
+									playerWins = true;
+								}
+							}
+						}
+						
+						if(playerWins == false) {
+							if(player1Turn == true) {
+								player1Turn = false;
+								playerSymbol = 'X';
+							} else {
+								player1Turn = true;
+								playerSymbol = 'O';
+							}
 						} else {
-							player1Turn = true;
-							playerSymbol = 'O';
+							System.out.println("Player " + playerSymbol + " wins.");
 						}
 					
 					} else {
