@@ -4,14 +4,15 @@ import java.util.Scanner;
 
 public class TwoDArray {
 
+	static char[][] ticTacToe = 
+		{
+				{' ', ' ', ' '},
+				{' ', ' ', ' '},
+				{' ', ' ', ' '}
+		};
+	
 	public static void main(String[] args) {
 //		char[][] ticTacToe = new char[3][3];
-		char[][] ticTacToe = 
-			{
-					{' ', ' ', ' '},
-					{' ', ' ', ' '},
-					{' ', ' ', ' '}
-			};
 		
 		Scanner userInput = new Scanner(System.in);
 		String input = "";
@@ -21,16 +22,7 @@ public class TwoDArray {
 		boolean draw = false;
 		
 		while(playerWins == false && draw == false) {
-			System.out.println("\\ y   0    1    2");
-			System.out.println("x   ===============");
-			for(byte x = 0; x < ticTacToe.length; x++) {
-				System.out.print(x + "   ");
-				for(byte y = 0; y < ticTacToe[x].length; y++) {
-					System.out.print("| " + ticTacToe[x][y] + " |");
-				}
-				System.out.println();
-				System.out.println("    ===============");
-			}
+			printTicTacToe();
 			
 			System.out.println("Player " + playerSymbol + " turn.");
 			System.out.println("Please input xy coordinate:");
@@ -85,14 +77,35 @@ public class TwoDArray {
 						}
 						
 						if(playerWins == false) {
-							if(player1Turn == true) {
-								player1Turn = false;
-								playerSymbol = 'X';
-							} else {
-								player1Turn = true;
-								playerSymbol = 'O';
+							
+							boolean containEmptySpace = false;
+							for(int rows = 0; rows < 3; rows++) {
+								for(int columns = 0; columns < 3; columns++) {
+									if(ticTacToe[rows][columns] == ' ') {
+										containEmptySpace = true;
+										break;
+									}
+								}
+								if(containEmptySpace == true) {
+									break;
+								}
 							}
+							if(containEmptySpace == false) {
+								draw = true;
+								printTicTacToe();
+								System.out.println("Its a draw.");
+							} else {
+								if(player1Turn == true) {
+									player1Turn = false;
+									playerSymbol = 'X';
+								} else {
+									player1Turn = true;
+									playerSymbol = 'O';
+								}
+							}
+							
 						} else {
+							printTicTacToe();
 							System.out.println("Player " + playerSymbol + " wins.");
 						}
 					
@@ -109,6 +122,19 @@ public class TwoDArray {
 			}
 		}
 		
+	}
+	
+	public static void printTicTacToe() {
+		System.out.println("\\ y   0    1    2");
+		System.out.println("x   ===============");
+		for(byte x = 0; x < ticTacToe.length; x++) {
+			System.out.print(x + "   ");
+			for(byte y = 0; y < ticTacToe[x].length; y++) {
+				System.out.print("| " + ticTacToe[x][y] + " |");
+			}
+			System.out.println();
+			System.out.println("    ===============");
+		}
 	}
 	
 }
