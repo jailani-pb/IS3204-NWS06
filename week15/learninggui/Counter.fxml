@@ -1,0 +1,10 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="week15.learninggui.CounterController">
+	<Label text="Hello" fx:id="labelMessage"/>
+	<TextField fx:id="textFieldMessage"/>
+	<Button text="Print Message" onAction="#printMessage"/>
+</VBox>
+
